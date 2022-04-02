@@ -1,0 +1,58 @@
+<script type="text/html" data-template-name="universal-convertor">
+    <div class="form-row">
+        <label for="node-input-property"><i class="fa fa-ellipsis-h"></i> <span data-i18n="node-red:common.label.property"></span></label>
+        <input type="text" id="node-input-property" style="width:70%;"/>
+    </div>
+    <div class="form-row">
+        <label for="node-input-inputFormat"><i class="fa fa-random"></i> <span data-i18n="node-red:template.label.inputFormat">Input Format</label>
+        <select type="text" id="node-input-inputFormat" style="width:70%;">
+            <option value="csv" label="csv" data-i18n="node-red:template.label.csv"></option>
+            <option value="xml" label="xml" data-i18n="node-red:template.label.xml"></option>
+            <option value="json" label="json" data-i18n="node-red:template.label.json"></option>
+            <option value="plainText" label="plainText" data-i18n="node-red:template.label.plainText"></option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-outputFormat"><i class="fa fa-random"></i> <span data-i18n="node-red:template.label.outputFormat">Output Format</label>
+        <select type="text" id="node-input-outputFormat" style="width:70%;">
+            <option value="csv" label="csv" data-i18n="node-red:template.label.csv"></option>
+            <option value="xml" label="xml" data-i18n="node-red:template.label.xml"></option>
+            <option value="json" label="json" data-i18n="node-red:template.label.json"></option>
+            <option value="plainText" label="plainText" data-i18n="node-red:template.label.plainText"></option>
+        </select>
+    </div>
+    <br/>
+    <div class="form-row">
+        <label for="node-input-data"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.data"></label>
+        <textarea id="node-input-data" data-i18n="[placeholder]node-red:common.label.data" style="width:70%;height: 30%;"></textarea>
+    </div>
+    
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('universal-convertor',{
+        category: 'function',
+        color:"#E2D96E",
+        defaults: {
+            data: {value:""},
+            inputFormat: {value:"plainText"},
+            outputFormat: {value:"json"},
+            property: {value:"payload",required:true}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "debug.png",
+        label: function() {
+            return this.name||"universal-convertor";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        },
+        oneditprepare: function() {
+            if (this.property === undefined) {
+                $("#node-input-property").val("payload");
+            }
+            $("#node-input-property").typedInput({default:'msg',types:['msg']});
+        }
+    });
+</script>
